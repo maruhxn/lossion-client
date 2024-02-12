@@ -1,3 +1,4 @@
+import Navbar from "@/components/component/navbar";
 import Providers from "@/components/providers";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
@@ -24,11 +25,14 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "mt-12 min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>

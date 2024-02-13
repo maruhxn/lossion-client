@@ -74,11 +74,11 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/">Profile</Link>
+          <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/r/create">Create Topic</Link>
+          <Link href="/topics/create">Create Topic</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

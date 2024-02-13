@@ -1,3 +1,4 @@
+import { getProfileImage } from "@/lib/utils";
 import { User } from "@/types/user";
 import { AvatarProps } from "@radix-ui/react-avatar";
 import Image from "next/image";
@@ -15,12 +16,7 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
         <div className="relative aspect-square h-full w-full">
           <Image
             fill
-            src={
-              user.profileImage.startsWith("http")
-                ? user.profileImage
-                : process.env.NEXT_PUBLIC_API_URL +
-                  `/files/${user.profileImage}`
-            }
+            src={getProfileImage(user.profileImage)}
             alt="프로필 이미지"
             referrerPolicy="no-referrer"
           />

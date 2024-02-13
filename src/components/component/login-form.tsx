@@ -46,10 +46,6 @@ export default function LoginForm() {
       }
     },
     onSuccess: (data) => {
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${data.accessToken}`;
-      axios.defaults.headers.common["Refresh"] = `Bearer ${data.refreshToken}`;
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       router.push("/");

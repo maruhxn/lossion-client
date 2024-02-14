@@ -7,3 +7,11 @@ export const ProfileUpdateValidator = z.object({
 });
 
 export type ProfileUpdateRequest = z.infer<typeof ProfileUpdateValidator>;
+
+export const PasswordUpdateValidator = z.object({
+  currPassword: z.string().min(2).max(20).optional(),
+  newPassword: z.string().min(2).max(20),
+  confirmNewPassword: z.string().min(2).max(20),
+});
+
+export type PasswordUpdateeRequest = z.infer<typeof PasswordUpdateValidator>;

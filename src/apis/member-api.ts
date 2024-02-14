@@ -4,3 +4,6 @@ export const MEMBER_BASE_URL = (memberId: number) =>
 
 export const CHANGE_PASSWORD_URL = (memberId: number) =>
   MEMBER_BASE_URL(memberId) + "/password";
+
+export const SET_PASSWORD_URL = (memberId: number) =>
+  MEMBER_BASE_URL(memberId) + "/set-password";

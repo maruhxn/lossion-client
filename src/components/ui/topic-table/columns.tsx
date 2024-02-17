@@ -1,8 +1,8 @@
 "use client";
 
+import { getFormatedDate } from "@/lib/utils";
 import { Topic } from "@/types/topic";
 import { ColumnDef } from "@tanstack/react-table";
-import { format, parseISO } from "date-fns";
 
 export const columns: ColumnDef<Topic>[] = [
   {
@@ -33,14 +33,14 @@ export const columns: ColumnDef<Topic>[] = [
     accessorKey: "createdAt",
     header: "작성일",
     cell: ({ row }) => {
-      return format(parseISO(row.getValue("createdAt")), "yyyy-MM-dd");
+      return getFormatedDate(row.getValue("closedAt"));
     },
   },
   {
     accessorKey: "closedAt",
     header: "투표 종료일",
     cell: ({ row }) => {
-      return format(parseISO(row.getValue("closedAt")), "yyyy-MM-dd");
+      return getFormatedDate(row.getValue("closedAt"));
     },
   },
 ];

@@ -83,7 +83,6 @@ export default function Component() {
       }
     }
   };
-  console.log(form.watch("images"));
 
   const { mutate: createTopics, isPending } = useMutation({
     mutationFn: async ({

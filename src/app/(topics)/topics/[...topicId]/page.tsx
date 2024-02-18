@@ -61,7 +61,7 @@ export default async function TopicDetail({
                   {topic.author.username}
                 </div>
                 <div className="text-sm text-gray-500 dark:text-gray-200">
-                  @{topic?.author.authorId}
+                  @{topic?.author.accountId}
                 </div>
               </div>
             </div>

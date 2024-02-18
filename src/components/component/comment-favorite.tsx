@@ -1,18 +1,19 @@
 "use client";
 
-import { TOPIC_FAVORITE_URL } from "@/apis/favorite-api";
+import { COMMENTS_FAVORITE_URL } from "@/apis/favorite-api";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { HeartIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { buttonVariants } from "../ui/button";
 
-export default function TopicFavorite({
-  topicId,
+export default function CommentFavorite({
+  commentId,
   favoriteCnt,
 }: {
-  topicId: number;
+  commentId: number;
   favoriteCnt: number;
 }) {
   const accessToken = localStorage.getItem("accessToken");
@@ -20,9 +21,9 @@ export default function TopicFavorite({
   const [displayFavoriteCnt, setDisplayFavoriteCnt] = useState(favoriteCnt);
 
   const { isError, error } = useQuery({
-    queryKey: [`topic-favorite-${topicId}`],
+    queryKey: [`comment-favorite-${commentId}`],
     queryFn: async () => {
-      const res = await axios.get(TOPIC_FAVORITE_URL(topicId), {
+      const res = await axios.get(COMMENTS_FAVORITE_URL(commentId), {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -43,7 +44,7 @@ export default function TopicFavorite({
 
   const { mutate: favorite, isPending } = useMutation({
     mutationFn: async () => {
-      await axios.patch(TOPIC_FAVORITE_URL(topicId), null, {
+      await axios.patch(COMMENTS_FAVORITE_URL(commentId), null, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -90,16 +91,17 @@ export default function TopicFavorite({
         favorite();
       }}
       className={cn(
-        "flex flex-col justify-center items-center space-y-1 text-gray-500 dark:text-gray-200 cursor-pointer p-3",
+        buttonVariants({ variant: "ghost" }),
+        "flex justify-center items-center space-x-2 text-gray-500 dark:text-gray-200 cursor-pointer",
         isLike && "text-red-500 dar:text-red-200"
       )}
     >
       {isLike ? (
-        <HeartIcon fill="red" strokeWidth={0} className="h-5 w-5" />
+        <HeartIcon fill="red" strokeWidth={0} className="h-3 w-3" />
       ) : (
-        <HeartIcon className="h-5 w-5" />
+        <HeartIcon className="h-3 w-3" />
       )}
-      <span className="text-sm">{displayFavoriteCnt}</span>
+      <span className="text-xs">{displayFavoriteCnt}</span>
     </div>
   );
 }

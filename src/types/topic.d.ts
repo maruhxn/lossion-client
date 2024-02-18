@@ -21,6 +21,7 @@ export interface CategoryItem {
 
 export interface AuthorItem {
   authorId: number;
+  accountId: string;
   username: string;
   profileImage: string;
 }

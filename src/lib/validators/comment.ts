@@ -6,3 +6,9 @@ export const CreateCommentValidator = z.object({
 });
 
 export type CreateCommentRequest = z.infer<typeof CreateCommentValidator>;
+
+export const UpdateCommentValidator = z.object({
+  text: z.string(),
+});
+
+export type UpdateCommentRequest = z.infer<typeof UpdateCommentValidator>;

@@ -52,23 +52,25 @@ export default function ReplySection({
   });
 
   return (
-    <Button
-      variant="ghost"
-      className={cn("flex items-center space-x-2 text-xs text-blue-500")}
-      onClick={() => {
-        !isOpen && getReplies();
-        setIsOpen((prev) => !prev);
-      }}
-    >
-      <ArrowDownIcon className="text-blue-500 w-4 h-4" />
-      <div>{`답글 ${repliesCount}개`}</div>
+    <>
+      <Button
+        variant="ghost"
+        className={cn("flex items-center space-x-2 text-xs text-blue-500")}
+        onClick={() => {
+          !isOpen && getReplies();
+          setIsOpen((prev) => !prev);
+        }}
+      >
+        <ArrowDownIcon className="text-blue-500 w-4 h-4" />
+        <div>{`답글 ${repliesCount}개`}</div>
+      </Button>
       {isOpen && (
-        <div className="divide-y-[1px] divide-gray-400">
+        <div className="divide-y-[1px] divide-gray-300">
           {replies.map((reply) => (
             <CommentComponent topicId={topicId} comment={reply} />
           ))}
         </div>
       )}
-    </Button>
+    </>
   );
 }

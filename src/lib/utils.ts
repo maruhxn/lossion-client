@@ -15,3 +15,7 @@ export function getProfileImage(profileImage: string) {
 export function getFormatedDate(date: string) {
   return format(parseISO(date), "yyyy-MM-dd");
 }
+
+export function getFormatedDateTime(date: string) {
+  return format(parseISO(date), "yyyy-MM-dd, hh:mm a");
+}

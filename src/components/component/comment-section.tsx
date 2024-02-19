@@ -12,7 +12,7 @@ export default async function CommentSection({ topicId }: { topicId: number }) {
     <div className="bg-white p-6">
       <CommentInput topicId={topicId} />
       {comments.length > 0 && (
-        <div className="divide-y-[1px] divide-gray-400">
+        <div className="divide-y-[1px] divide-gray-300">
           {comments.map((comment) => (
             <CommentComponent topicId={topicId} comment={comment} />
           ))}

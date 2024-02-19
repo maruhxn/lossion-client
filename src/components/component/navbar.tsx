@@ -1,27 +1,12 @@
 "use client";
 
-import { AUTH_BASE_URL } from "@/apis/auth-api";
-import { User } from "@/types/user";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useUser from "@/hooks/use-user";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import UserAccountNav from "./user-account-nav";
 
 const Navbar = () => {
-  const accessToken = localStorage.getItem("accessToken");
-
-  const { isLoading, data, isError, error } = useQuery({
-    queryKey: ["profile"],
-    queryFn: async () => {
-      const { data } = await axios.get(AUTH_BASE_URL, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return data.data as User;
-    },
-  });
+  const { isLoading, data, isError, error } = useUser();
 
   return (
     <header className="fixed top-0 inset-x-0 h-fit bg-zinc-100 border-b border-zinc-300 z-[10] py-2">

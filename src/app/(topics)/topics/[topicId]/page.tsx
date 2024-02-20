@@ -1,6 +1,7 @@
 import { TOPIC_BASE_URL } from "@/apis/topic-api";
 import CommentSection from "@/components/component/comment-section";
 import CopyLink from "@/components/component/copy-link";
+import TopicAuthorAction from "@/components/component/topic-author-action";
 import TopicFavorite from "@/components/component/topic-favorite";
 import VoteSection from "@/components/component/vote-section";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +15,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { getFormatedDate, getProfileImage } from "@/lib/utils";
 import { TopicDetail } from "@/types/topic";
-import axios from "axios";
 import {
   EyeIcon,
   ImageIcon,
@@ -29,16 +29,19 @@ export default async function TopicDetail({
   params: { topicId: number };
 }) {
   const topicDetailData = await (
-    await axios.get(TOPIC_BASE_URL(params.topicId))
-  ).data;
+    await fetch(TOPIC_BASE_URL(params.topicId), { cache: "no-cache" })
+  ).json();
   const topic: TopicDetail = topicDetailData.data;
 
   return (
     <div className="container py-6 lg:py-12">
       <div className="container py-6 space-y-4 lg:py-12 xl:space-y-6 px-6">
-        <div className="flex space-x-3">
-          <Badge>{topic.categoryItem.name}</Badge>
-          {topic.isClosed && <Badge variant="destructive">closed</Badge>}
+        <div className="flex justify-between items-center">
+          <div className="flex space-x-3">
+            <Badge>{topic.categoryItem.name}</Badge>
+            {topic.isClosed && <Badge variant="destructive">closed</Badge>}
+          </div>
+          <TopicAuthorAction topic={topic} />
         </div>
         <div className="w-full bg-white dark:bg-gray-800">
           <div className="flex justify-between items-center ">
@@ -91,7 +94,7 @@ export default async function TopicDetail({
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:tracking-tighter py-4">
             {topic.title}
           </h1>
-          <div className="px-6 py-4 space-y-2">
+          <div className="px-6 py-4 space-y-4">
             <div className="text-gray-800 dark:text-gray-200">
               {topic.description}
             </div>
@@ -118,6 +121,7 @@ export default async function TopicDetail({
                 <CarouselNext />
               </Carousel>
             )}
+            <Separator />
             <VoteSection
               topicId={params.topicId}
               firstChoice={topic.firstChoice}

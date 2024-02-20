@@ -83,7 +83,6 @@ export default function ChangePassword() {
 
   useEffect(() => {
     if (isError) {
-      console.log(error);
       toast({
         title: "비밀번호가 존재하지 않습니다.",
         description:

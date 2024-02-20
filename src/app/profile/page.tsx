@@ -190,7 +190,6 @@ export default function ProfilePage() {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        console.log(err);
         toast({
           title: "There was an error.",
           description: err.response?.data.message,

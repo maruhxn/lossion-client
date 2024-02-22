@@ -8,10 +8,10 @@ import {
 import { PageInfo } from "@/types/page-info";
 
 export default function TablePagination({
-  currPage,
+  searchCond,
   pageInfo,
 }: {
-  currPage: number;
+  searchCond: string;
   pageInfo: PageInfo;
 }) {
   return (

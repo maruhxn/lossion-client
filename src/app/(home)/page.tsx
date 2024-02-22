@@ -2,6 +2,7 @@ import { TOPIC_BASE_URL } from "@/apis/topic-api";
 import CategorySection from "@/components/component/category-section";
 import TablePagination from "@/components/component/pagination";
 import ReplaceClient from "@/components/component/replace-client";
+import Search, { SearchCond } from "@/components/component/search";
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "@/components/ui/topic-table/columns";
 import { PageInfo } from "@/types/page-info";
@@ -9,15 +10,28 @@ import axios from "axios";
 
 type Result = PageInfo & { results: any[] };
 
+export interface SearchParams {
+  accessToken: string;
+  refreshToken: string;
+  page: number;
+  searchCond: SearchCond;
+  searchKey: string;
+}
+
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { accessToken: string; refreshToken: string; page: number };
+  searchParams: SearchParams;
 }) {
-  const getTopics = async () =>
-    await axios.get(
-      TOPIC_BASE_URL() + `?page=${searchParams.page ? searchParams.page : 0}`
-    );
+  const a = {
+    제목: "title",
+    내용: "description",
+    작성자: "author",
+  };
+  let searchCond = `?page=${searchParams.page ? searchParams.page : 0}`;
+  searchCond += `&${a[searchParams.searchCond]}=${searchParams.searchKey}`;
+
+  const getTopics = async () => await axios.get(TOPIC_BASE_URL() + searchCond);
   const { data } = await getTopics();
   const result: Result = data.data;
 
@@ -38,9 +52,11 @@ export default async function Home({
             </p>
           </div>
         </div>
+
         <div className="mx-auto grid w-full max-w-5xl gap-4 px-4 md:gap-6 lg:gap-8 xl:px-6">
+          <Search />
           <DataTable columns={columns} data={result.results} />
-          <TablePagination currPage={searchParams.page} pageInfo={pageInfo} />
+          <TablePagination searchCond={searchCond} pageInfo={pageInfo} />
         </div>
       </div>
     </main>

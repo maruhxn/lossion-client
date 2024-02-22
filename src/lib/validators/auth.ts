@@ -16,3 +16,27 @@ export const SignUpValidator = z.object({
 });
 
 export type SignUpRequest = z.infer<typeof SignUpValidator>;
+
+export const FindPasswordValidator = z.object({
+  accountId: z.string(),
+  email: z.string().email(),
+});
+
+export type FindPasswordRequest = z.infer<typeof FindPasswordValidator>;
+
+export const GetAuthTokenValidator = z.object({
+  accountId: z.string(),
+  email: z.string().email(),
+  payload: z.string().length(6),
+});
+
+export type GetAuthTokenRequest = z.infer<typeof GetAuthTokenValidator>;
+
+export const AnonymousChangePasswordValidator = z.object({
+  newPassword: z.string().min(2).max(20),
+  confirmNewPassword: z.string().min(2).max(20),
+});
+
+export type AnonymousChangePasswordRequest = z.infer<
+  typeof AnonymousChangePasswordValidator
+>;

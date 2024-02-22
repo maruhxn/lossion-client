@@ -56,3 +56,7 @@ export interface TopicImage {
   originalName: string;
   storedName: string;
 }
+
+export interface MyTopic extends Topic {
+  updatedAt: string;
+}

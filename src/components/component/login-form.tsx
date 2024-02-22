@@ -72,7 +72,10 @@ export default function LoginForm() {
         <div className="space-y-2">
           <div className="flex items-center">
             <Label htmlFor="password">비밀번호</Label>
-            <Link className="ml-auto inline-block text-sm underline" href="#">
+            <Link
+              className="ml-auto inline-block text-sm underline"
+              href="/auth/find-password"
+            >
               비밀번호를 잊으셨나요?
             </Link>
           </div>

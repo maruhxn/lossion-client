@@ -349,6 +349,12 @@ export default function ProfilePage() {
               </Button>
             </div>
             <div className="grid gap-2">
+              <Label>나의 토론</Label>
+              <Button size="default" onClick={() => router.push("/profile/my")}>
+                '나의 토론'으로 이동
+              </Button>
+            </div>
+            <div className="grid gap-2">
               <Label className="">회원 탈퇴</Label>
               <Button
                 isLoading={isWithdrawing}

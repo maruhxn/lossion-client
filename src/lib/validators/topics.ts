@@ -9,6 +9,14 @@ const ALLOWED_IMAGE_TYPES = [
   "image/jpg",
 ];
 
+export const TopicSearchValidator = z.object({
+  title: z.string().max(255).optional(),
+  description: z.string().optional(),
+  author: z.string().max(10).optional(),
+});
+
+export type TopicSearchRequest = z.infer<typeof TopicSearchValidator>;
+
 export const CreateTopicsValidator = z.object({
   title: z.string().min(2).max(255),
   description: z.string(),
